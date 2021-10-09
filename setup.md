@@ -1,6 +1,9 @@
 # Build
 
-## Configure
+## Setup
+Copy the `SDL.dll` to the source directory for the program to run successfully
+
+## Configure & Build
 
 Configure with cmake
 ```powershell
@@ -19,7 +22,19 @@ cmake --build build --target clean
 
 Run the app
 ```powershell
-build/<app>.exe 
+build/psychic-guacamole.exe 
+```
+
+Get changes
+```powershell
+git pull
+```
+
+Push changes
+```powershell
+git add <files-that-changed>
+git commit . -m '<message about the commit>'
+git push
 ```
 
 Flow chart
