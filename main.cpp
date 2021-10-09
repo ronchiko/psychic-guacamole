@@ -12,9 +12,10 @@ int main(int argc, char *argv[]) {
 	}
 
 	// Create a window
-	SDL_Window *window = SDL_CreateWindow("Psychic Guacamole", SDL_WINDOWPOS_UNDEFINED, 
-			SDL_WINDOWPOS_UNDEFINED, 500, 500, 0);
+	SDL_Window *window = SDL_CreateWindow("Psychic Guacamole", 
+			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 500, 0);
 	SDL_Surface *surface = SDL_GetWindowSurface(window);
+	
 
 	// While SDL doesn't want to quit
 	bool shouldQuit = false;
@@ -24,9 +25,9 @@ int main(int argc, char *argv[]) {
 			if(event.type == SDL_QUIT) shouldQuit = true;
 		}
 
-		// Draw a rectangle to the screen
+		// Draw a red rectangle to the screen
 		SDL_Rect rect = { 50, 50, 100, 100 };
-		SDL_FillRect(surface, &rect, 0xFF0000FF);
+		SDL_FillRect(surface, &rect, SDL_MapRGBA(surface->format, 255, 0, 0, 255));
 
 		SDL_UpdateWindowSurface(window);
 	}
