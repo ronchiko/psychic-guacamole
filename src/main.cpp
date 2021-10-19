@@ -5,14 +5,24 @@
 #include <math.h>
 #include "window.hpp"
 
-void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Uint32 color){
+void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Color color){
+	constexpr static float BLEND_FACTOR = 10;		// Greater then 0 
+
 	for(int i = 0; i < radius; i++){
 		for(int j = 0; j < radius; j++){
-			if( i * i + j * j <= radius * radius ){
-				SDL_DrawPixel(surface, x + i, y + j, color);
-				SDL_DrawPixel(surface, x - i, y + j, color);
-				SDL_DrawPixel(surface, x + i, y - j, color);
-				SDL_DrawPixel(surface, x - i, y - j, color);
+
+			float ratio = (i * i + j * j) / (radius * radius);
+			if(ratio <= 1){
+				// b = 1 - r ^ BLEND
+				float blend = 1 - (float)std::pow(ratio, BLEND_FACTOR);
+				
+				SDL_BlendPixel(surface, x + i, y + j, color, blend);
+				SDL_BlendPixel(surface, x - i, y - j, color, blend);
+				// To avoid drawing over a drawn pixel this check is nessecary
+				if(i != 0 && j != 0 && j != radius && i != radius) {
+					SDL_BlendPixel(surface, x - i, y + j, color, blend);
+					SDL_BlendPixel(surface, x + i, y - j, color, blend);
+				}
 			}
 		}
 	}
@@ -72,10 +82,8 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
-
 	{
 		Window window("Psychic Guacamole", 500, 500);
-
 		// While SDL doesn't want to quit
 		bool shouldQuit = false;
 		SDL_Event event;
@@ -87,11 +95,17 @@ int main(int argc, char *argv[]) {
 			// Draw a red rectangle to the screen
 			SDL_Rect rect = { 50, 50, 100, 100 };
 			SDL_Surface *surface = window.Surface();
+			SDL_FillRect(surface, nullptr, SDL_MapRGBA(surface->format, 0, 0, 0, 255));
+			
 			SDL_FillRect(surface, &rect, SDL_MapRGBA(surface->format, 255, 0, 0, 255));
 			SDL_FillCircle(surface, 400, 400, 50, SDL_MapRGBA(surface->format, 0, 0, 255, 255));
+			SDL_FillCircle(surface, 400, 350, 50, SDL_MapRGBA(surface->format, 255, 0, 255, 255));
 			
 			SDL_FillTriangle(surface, 160, 200, 210, 400, 340, 300, SDL_MapRGBA(surface->format, 255, 255, 0, 255));
 			SDL_FillTriangle2(surface, { 20, 100 }, { 50, 30 }, { 230, 40 }, SDL_MapRGBA(surface->format, 255, 255, 255, 255));
+
+			Point2d polygon[5] = { { 50, 50 }, { 100, 30 }, { 260, 170 }, { 490, 350 }, { 330, 460 } };
+			SDL_FillPoly(surface, polygon, 5, SDL_MapRGBA(surface->format, 0, 255, 255, 255));
 
 			window.Update();
 		}
