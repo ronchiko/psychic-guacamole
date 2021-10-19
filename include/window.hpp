@@ -2,7 +2,7 @@
 
 #include <SDL.h>
 
-void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Uint32 color);
+#include "base.hpp"
 
 class Window {
 public:

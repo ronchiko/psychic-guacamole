@@ -5,8 +5,6 @@
 #include <math.h>
 #include "window.hpp"
 
-#define SDL_DrawPixel(surface, x, y, color) (((Uint32*)(surface) -> pixels)[((y) * (surface) -> w + (x))] = (color))
-
 void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Uint32 color){
 	for(int i = 0; i < radius; i++){
 		for(int j = 0; j < radius; j++){
@@ -74,6 +72,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 
+
 	{
 		Window window("Psychic Guacamole", 500, 500);
 
@@ -89,9 +88,10 @@ int main(int argc, char *argv[]) {
 			SDL_Rect rect = { 50, 50, 100, 100 };
 			SDL_Surface *surface = window.Surface();
 			SDL_FillRect(surface, &rect, SDL_MapRGBA(surface->format, 255, 0, 0, 255));
-			SDL_FillCircle(surface, 400, 400, 50, SDL_MapRGBA(surface->format, 255, 0, 255, 255));
+			SDL_FillCircle(surface, 400, 400, 50, SDL_MapRGBA(surface->format, 0, 0, 255, 255));
 			
 			SDL_FillTriangle(surface, 160, 200, 210, 400, 340, 300, SDL_MapRGBA(surface->format, 255, 255, 0, 255));
+			SDL_FillTriangle2(surface, { 20, 100 }, { 50, 30 }, { 230, 40 }, SDL_MapRGBA(surface->format, 255, 255, 255, 255));
 
 			window.Update();
 		}
