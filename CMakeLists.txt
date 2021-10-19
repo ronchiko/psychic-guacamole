@@ -8,7 +8,7 @@ include_directories(${CUSTOM_INCLUDE_DIRECTORIES})
 find_package(SDL2 REQUIRED)
 
 # Application executable
-file(GLOB_RECURSE Source src/*.cpp)
+file(GLOB_RECURSE Source CONFIGURE_DEPENDS src/*.cpp)
 
 add_executable(psychic-guacamole ${Source})
 target_include_directories(psychic-guacamole PUBLIC ${SDL2_INCLUDE_DIR})
