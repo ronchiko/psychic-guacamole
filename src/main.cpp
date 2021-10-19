@@ -55,7 +55,7 @@ void SDL_FillTriangle(SDL_Surface *surface, int x1, int y1, int x2, int y2, int 
 
 	for (int i = miny; i < maxy; i++)
 	{
-		for(int j = minx; j < maxx; j++)\
+		for(int j = minx; j < maxx; j++)
 		{
 			if(PointInTriangle(j, i, x1, y1, x2, y2, x3, y3)){
 				SDL_DrawPixel(surface, j, i, color);
