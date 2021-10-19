@@ -30,3 +30,9 @@ void SDL_FillTriangle2(SDL_Surface *surface, const Point2d& a, const Point2d& b,
 			SDL_DrawHLine(surface, x0, x1, i, cl);
 	}
 }
+
+void SDL_FillPoly(SDL_Surface *s, const Point2d *p, size_t len, Color c) {
+	for(int i = 0; i < len - 2; ++i) {
+		SDL_FillTriangle2(s, p[i], p[i + 1], p[i + 2], c);
+	}
+}

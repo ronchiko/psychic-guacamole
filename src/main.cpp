@@ -104,6 +104,9 @@ int main(int argc, char *argv[]) {
 			SDL_FillTriangle(surface, 160, 200, 210, 400, 340, 300, SDL_MapRGBA(surface->format, 255, 255, 0, 255));
 			SDL_FillTriangle2(surface, { 20, 100 }, { 50, 30 }, { 230, 40 }, SDL_MapRGBA(surface->format, 255, 255, 255, 255));
 
+			Point2d polygon[5] = { { 50, 50 }, { 100, 30 }, { 260, 170 }, { 490, 350 }, { 330, 460 } };
+			SDL_FillPoly(surface, polygon, 5, SDL_MapRGBA(surface->format, 0, 255, 255, 255));
+
 			window.Update();
 		}
 	}

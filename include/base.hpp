@@ -31,3 +31,5 @@ void SDL_DrawHLine(SDL_Surface *surface, int x1, int x2, int y, Color color);
 void SDL_FillTriangle(SDL_Surface *surface, int x1, int y1, int x2, int y2, int x3, int y3, Color color);
 void SDL_FillTriangle2(SDL_Surface *surface, const Point2d&, const Point2d&, const Point2d&, Color);
 void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Color color);
+
+void SDL_FillPoly(SDL_Surface *s, const Point2d *p, size_t len, Color c);
