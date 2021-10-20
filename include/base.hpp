@@ -7,6 +7,11 @@
 struct Point2d {
 	int x, y;
 };
+
+struct Pointf2d {
+	float x, y;
+};
+
 typedef Uint32 Color;
 
 #define SDL_DrawPixel(surface, x, y, color) (((Uint32*)(surface) -> pixels)[((y) * (surface) -> w + (x))] = (color))
@@ -27,9 +32,13 @@ inline void SDL_BlendPixel(SDL_Surface *surface, int x, int y, Color c, float bl
 	*at = out;
 }
 
+int sign(Point2d p1, Point2d p2, Point2d p3);
+float signf(Pointf2d p1, Pointf2d p2, Pointf2d p3);
+bool PointInTriangle (Point2d p, Point2d v1, Point2d v2, Point2d v3);
+bool PointInTriangle (Pointf2d p, Pointf2d v1, Pointf2d v2, Pointf2d v3);
 void SDL_DrawHLine(SDL_Surface *surface, int x1, int x2, int y, Color color);
-void SDL_FillTriangle(SDL_Surface *surface, int x1, int y1, int x2, int y2, int x3, int y3, Color color);
+void SDL_FillTriangle(SDL_Surface *surface, Point2d p1, Point2d p2, Point2d p3, Color color);
+void SDL_FillTriangleAntiAliasing(SDL_Surface *surface, Pointf2d p1, Pointf2d p2, Pointf2d p3, Color color);
 void SDL_FillTriangle2(SDL_Surface *surface, const Point2d&, const Point2d&, const Point2d&, Color);
 void SDL_FillCircle(SDL_Surface *surface, int x, int y, float radius, Color color);
-
 void SDL_FillPoly(SDL_Surface *s, const Point2d *p, size_t len, Color c);
