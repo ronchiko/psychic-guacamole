@@ -114,24 +114,24 @@ void SDL_FillTriangleAntiAliasing(SDL_Surface *surface, Pointf2d p1, Pointf2d p2
 			if(PointInTriangle({j, i}, p1, p2, p3)){
 				int N = 1000;
 				float sum = 0;
+				float minx = j * 1000 - 500;
+				float maxx = j * 1000 + 500;
+
+				float miny = i * 1000 - 500;
+				float maxy = i  * 1000 + 500;
+				int rangex = maxx - minx + 1;
+				int rangey = maxy - miny + 1;
+
 				for(int k = 0; k < N; k++)
 				{
-					float minx = j * 1000 - 500;
-					float maxx = j * 1000 + 500;
-
-					float miny = i * 1000 - 500;
-					float maxy = i  * 1000 + 500;
-
+					
 					int ran = std::rand();
-					int range = maxx - minx + 1;
-					float x = ( (float)(ran % range) + minx ) / 1000.0f;
+					float x = ( (float)(ran % rangex) + minx ) / 1000.0f;
 
 					ran = std::rand();
-					range = maxy - miny + 1;
-					float y = ( (float)(ran % range) + miny ) / 1000.0f;
+					float y = ( (float)(ran % rangey) + miny ) / 1000.0f;
 
 					//std::cout << j << " " << i << " , " <<  x << " " << y << std::endl;
-					
 
 					if(PointInTriangle({x, y}, p1, p2, p3))
 					{
