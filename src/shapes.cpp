@@ -77,7 +77,6 @@ bool PointInTriangle (Pointf2d p, Pointf2d v1, Pointf2d v2, Pointf2d v3)
     has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
     has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
 
-    //return !(has_neg && has_pos);
 	return has_neg ^ has_pos;
 }
 
