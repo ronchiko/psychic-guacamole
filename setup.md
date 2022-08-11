@@ -45,3 +45,8 @@ graph LR;
     Run-->Build;
     Clean-->Build;
 ```
+
+Debug line
+```powershell
+addr2line -e build/psychic-guacamole.exe -a (number)
+```

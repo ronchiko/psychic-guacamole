@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(Psychic-Guacamole VERSION 0.1)
 
 set(CUSTOM_INCLUDE_DIRECTORIES "include/")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb")
 
 include_directories(${CUSTOM_INCLUDE_DIRECTORIES})
 find_package(SDL2 REQUIRED)
